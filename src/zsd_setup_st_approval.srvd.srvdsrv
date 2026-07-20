@@ -1,0 +1,5 @@
+@EndUserText.label: 'Service Definition for Straightening Consumption'
+define service ZSD_SETUP_ST_APPROVAL {
+  expose ZC_SETUP_ST_HEADER;
+  expose ZC_SETUP_ST_ITEM;
+}

@@ -1,0 +1,157 @@
+managed implementation in class zbp_i_setup_st_head unique;
+strict ( 2 );
+with draft;
+
+define behavior for ZI_SETUP_ST_HEAD //alias <alias_name>
+persistent table zqm_st_setup_app
+draft table zdb_st_setup_hdd
+with additional save
+
+etag master LocalLastChangedOn
+lock master total etag ChangedOn
+authorization master ( instance )
+{
+  create ( authorization : none );
+  update;
+  delete;
+  draft action Edit;
+  draft action Activate optimized;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare;
+
+  field ( numbering : managed, readonly ) Cuuid;
+  field ( readonly ) setupapprovalno, Drgno, RmSpecification, Partno, currentoperationno, operationdetails;
+  field ( readonly ) CreatedOn, createdby, nextoperation, previousoperation, Material, plant,
+                     changedon, changedby,
+                     locallastchangedon, locallastchangedby, rawmatspec, partdesc;
+
+  field ( features : instance )
+    Productionorder,
+    Batch;
+
+  association _Item { create; with draft; }
+
+  factory action getItem [1..*];
+  action getpdf result [1] $self;
+
+  determination createSetupNo on save { create; }
+  determination fetchHeaderFromProdOrder on modify { field Productionorder; }
+  determination fetchHeaderFromBatch on modify { field Batch; }
+  determination updateHeaderDetails on modify { field Material; }
+  determination verifyGrade on modify { field Grade; }
+
+  side effects
+  {
+    action getItem affects $self;
+
+    field Material affects field Drgno,
+        field RmSpecification,
+        field Partno,
+        field Grade;
+
+    field Productionorder affects field partdesc;
+
+    field Batch affects field Plant,
+        field Material,
+        field Materialdescription,
+        field Materiallongtxt,
+        field rawmatspec,
+        field Drgno,
+        field RmSpecification,
+        field Partno,
+        field Grade;
+  }
+
+  mapping for zqm_st_setup_app
+    {
+      Cuuid                   = cuuid;
+      Inspectionlot           = inspectionlot;
+      Lotcreate               = lotcreate;
+      Startofinsp             = startofinsp;
+      Endofinsp               = endofinsp;
+      Plant                   = plant;
+      Material                = material;
+      Customer                = customer;
+      Baseunit                = baseunit;
+      Productionorder         = productionorder;
+      Inspectionlotobjecttext = inspectionlotobjecttext;
+      Batch                   = batch;
+      Supplier                = supplier;
+      Manufacturer            = manufacturer;
+      Inspectionoperation     = inspectionoperation;
+      Inspection              = inspection;
+      Salesorder              = salesorder;
+      Drgno                   = drgno;
+      RmSpecification         = rm_specification;
+      Grade                   = grade;
+      Partno                  = partno;
+      Operationtext           = operationtext;
+      Workcentertext          = workcentertext;
+      Operationconfirmation   = operationconfirmation;
+      Shift                   = shift;
+      Operatorname            = operatorname;
+      Previousopt             = previousopt;
+      Nextopt                 = nextopt;
+      Filename                = filename;
+      Attachments             = attachments;
+      Mimetype                = mimetype;
+      Materialdescription     = materialdescription;
+      Customername            = customername;
+      QtyChkd                 = qty_chkd;
+      InvNo                   = inv_no;
+      InvDate                 = inv_date;
+      CustDraw                = cust_draw;
+      SksDraw                 = sks_draw;
+      Materiallongtxt         = materiallongtxt;
+      FilenameUl              = filename_ul;
+      AttachmentsUl           = attachments_ul;
+      MimetypeUl              = mimetype_ul;
+      Formtype                = formtype;
+      refnum                  = refnum;
+      partdesc                = partdesc;
+      rawmatspec              = rawmatspec;
+      ToolNo                 = toolno;
+      operator                = operator;
+      currentoperationno      = currentoperationno;
+      operationdetails        = operationdetails;
+      inspector               = inspector;
+      previousoperation       = previousoperation;
+      nextoperation           = nextoperation;
+      dateshift               = dateshift;
+      machine                 = machine;
+      remarks                 = remarks;
+      inspectby               = inspectby;
+      submittedtoprd          = submittedtoprd;
+      submittedtoqa           = submittedtoqa;
+      submittedtoprd_time     = submittedtoprd_time;
+      submittedtoqa_time      = submittedtoqa_time;
+      setupapprovalno         = setupapprovalno;
+      zdate                   = zdate;
+      CreatedOn               = created_on;
+      CreatedBy               = created_by;
+      ChangedOn               = changed_on;
+      ChangedBy               = changed_by;
+      LocalLastChangedOn      = local_last_changed_on;
+      LocalLastChangedBy      = local_last_changed_by;
+    }
+}
+
+define behavior for ZI_SETUP_ST_ITTEM //alias <alias_name>
+persistent table zqm_st_setup_ap2
+draft table zdb_st_setup_id
+with additional save
+lock dependent by _HDR
+authorization dependent by _HDR
+//etag master <field_name>
+{
+  update;
+  delete;
+  field ( readonly ) Cuuid, Itemno, Parameters, Specifications, Mmr;
+
+  field ( features : instance ) obs2, obs2_t, obs3, obs3_t, obs4, obs4_t, obs5, obs5_t;
+
+
+  association _HDR { with draft; }
+
+}

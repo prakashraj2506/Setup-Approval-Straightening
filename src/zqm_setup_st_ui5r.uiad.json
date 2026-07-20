@@ -1,0 +1,35 @@
+{
+  "formatVersion": "2",
+  "header": {
+    "description": "An SAP Fiori application.",
+    "originalLanguage": "en",
+    "abapLanguageVersion": "cloudDevelopment"
+  },
+  "generalInformation": {
+    "appType": "ui5",
+    "catalogId": "SAP_TC_UI5_REPO_UIAD",
+    "targetMappingTitle": "Setup Approval"
+  },
+  "ui5AppDetails": {
+    "appId": "zqmsetupst.zqmsetupstraightening"
+  },
+  "navigation": {
+    "targetMappingId": "UI5R_E8BB8C18E0370B56B775A558D780B464632D4BA8_TM",
+    "semanticObject": "zsb_setup_st_approval",
+    "action": "Display",
+    "desktop": true,
+    "tablet": true,
+    "phone": true
+  },
+  "tiles": [
+    {
+      "id": "UI5R_E8BB8C18E0370B56B775A558D780B464632D4BA8_AL",
+      "tileType": "static",
+      "isDefault": true,
+      "standard": {
+        "title": "Setup Approval",
+        "subtitle": "Straightening"
+      }
+    }
+  ]
+}

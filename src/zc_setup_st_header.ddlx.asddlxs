@@ -1,0 +1,139 @@
+@Metadata.layer: #CORE
+
+@UI: {
+  headerInfo: {
+    typeName       : 'Setup Approval',
+    typeNamePlural : 'Setup Approval',
+    title          : { type: #STANDARD, label: 'Setup Approval', value: 'setupapprovalno' },
+    description    : { type: #STANDARD, value: 'setupapprovalno' }
+  }
+}
+annotate entity ZC_SETUP_ST_HEADER with
+{
+  @UI.facet: [
+  {
+  id      : 'GeneralInfo',
+  label   : 'Header',
+  type    : #IDENTIFICATION_REFERENCE,
+  purpose : #STANDARD,
+  position: 10
+  },
+
+  { id           : 'LOT_I1',
+  purpose      : #STANDARD,
+  type         : #LINEITEM_REFERENCE,
+  label        : 'Item',
+  position     :  20 ,
+  targetElement: '_Item'},
+
+  {
+  id      : 'footer',
+  label   : 'Footer',
+  targetQualifier: 'footer',
+  type    : #IDENTIFICATION_REFERENCE,
+  purpose : #STANDARD,
+  position: 30
+  }
+
+
+  ]
+  @UI.identification: [  { type: #FOR_ACTION, dataAction: 'GetPDF', label: 'Get PDF'  }]
+
+  Cuuid;
+  @UI.identification: [{ position: 20, label: 'Plant' }]
+  @UI.lineItem      : [{ position: 20, label: 'Plant' }]
+  Plant;
+  @UI.identification: [{ position: 20, label: 'Setup Approval Number' }]
+  @UI.lineItem      : [{ position: 20, label: 'Setup Approval Number' }]
+  setupapprovalno;
+  @UI.identification: [{ position: 20, label: 'Material' }]
+  @UI.lineItem      : [{ position: 20, label: 'Material' }]
+  Material;
+  @UI.identification: [{ position: 20, label: 'Production Order' }]
+  @UI.lineItem      : [{ position: 20, label: 'Production Order' }]
+  @EndUserText.label: 'Production Order'
+  Productionorder;
+
+  @UI.identification: [{ position: 20, label: 'Batch' }]
+  @UI.lineItem      : [{ position: 20, label: 'Batch' }]
+  Batch;
+
+  @UI: { identification: [ { position: 400 }] }
+  @EndUserText.label: 'Form'
+  Attachments;
+  @UI: { identification: [ { position: 410 } ] }
+  @EndUserText.label: 'Part No'
+  Partno;
+
+  @UI: { identification: [ { position: 420 } ] }
+  @EndUserText.label: 'Reference Number'
+  refnum;
+
+  @UI: { identification: [ { position: 430 } ] }
+  @EndUserText.label: 'Part Description'
+  partdesc;
+
+  @UI: { identification: [ { position: 440 } ] }
+  @EndUserText.label: 'SKS Drg. No'
+  Drgno;
+
+  @UI: { identification: [ { position: 450 } ] }
+  @EndUserText.label: 'Raw Material Specification'
+  rawmatspec;
+
+  @UI: { identification: [ { position: 460 } ] }
+  @EndUserText.label: 'Tool Number'
+  toolno;
+
+  @UI: { identification: [ { position: 470 } ] }
+  @EndUserText.label: 'Operator'
+  operator;
+
+  @UI: { identification: [ { position: 480 } ] }
+  @EndUserText.label: 'Current Operation No'
+  currentoperationno;
+
+  @UI: { identification: [ { position: 490 } ] }
+  @EndUserText.label: 'Operation Details'
+  operationdetails;
+
+  @UI: { identification: [ { position: 500 } ] }
+  @EndUserText.label: 'Inspector'
+  inspector;
+
+  @UI: { identification: [ { position: 510 } ] }
+  @EndUserText.label: 'Previous Operation'
+  previousoperation;
+
+  @UI: { identification: [ { position: 520 } ] }
+  @EndUserText.label: 'Next Operation'
+  nextoperation;
+
+  @UI: { identification: [ { position: 530 } ] }
+  @EndUserText.label: 'Shift'
+  dateshift;
+
+  @UI: { identification: [ { position: 540 } ] }
+  @EndUserText.label: 'Machine'
+  machine;
+
+  @UI: { identification: [ { position: 550 , qualifier: 'footer' } ] }
+  @EndUserText.label: 'Remarks field'
+
+  @UI.multiLineText: true
+
+  remarks;
+
+  @UI: { identification: [ { position: 560 , qualifier: 'footer' } ] }
+  @EndUserText.label: 'Inspected & Approved By'
+  inspectby;
+
+  @UI: { identification: [ { position: 570 , qualifier: 'footer'} ] }
+  @EndUserText.label: 'Submitted to production by QA - time'
+  submittedtoprd_time;
+
+  @UI: { identification: [ { position: 580 , qualifier: 'footer'} ] }
+  @EndUserText.label: 'Submitted to QA by Production - time'
+  submittedtoqa_time;
+
+}

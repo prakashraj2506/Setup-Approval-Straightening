@@ -1,0 +1,58 @@
+@Metadata.layer: #CORE
+
+@UI: {
+  headerInfo: {
+    typeName       : 'Observations',
+    typeNamePlural : 'Observations',
+    title          : { type: #STANDARD, label: 'Observations', value: 'Itemno' },
+    description    : { type: #STANDARD, value: 'Parameters' }
+  }
+}
+annotate entity ZC_SETUP_ST_ITEM with
+{
+  @UI.facet: [
+  {
+  id      : 'GeneralInfo',
+  label   : 'Observations',
+  type    : #IDENTIFICATION_REFERENCE,
+  purpose : #STANDARD,
+  position: 10
+  }]
+  @UI.identification: [{ position: 10, label: 'Itemno' }]
+  @UI.lineItem      : [{ position: 10, label: 'Itemno' }]
+
+  Itemno;
+
+  @UI.identification: [{ position: 20, label: 'Parameters' }]
+  @UI.lineItem      : [{ position: 20, label: 'Parameters' }]
+  Parameters;
+
+  @UI.identification: [{ position: 30, label: 'Specifications' }]
+  @UI.lineItem      : [{ position: 30, label: 'Specifications' }]
+  Specifications;
+
+  @UI.identification: [{ position: 40, label: 'Mmr' }]
+  @UI.lineItem      : [{ position: 40, label: 'Mmr' }]
+  Mmr;
+
+  @UI.identification: [{ position: 50, label: 'Obs 1' }]
+  @UI.lineItem      : [{ position: 50, label: 'Obs 1' }]
+  obs1_t;
+
+  @UI.identification: [{ position: 60, label: 'Obs 2' }]
+  @UI.lineItem      : [{ position: 60, label: 'Obs 2' }]
+  obs2_t;
+
+  @UI.identification: [{ position: 70, label: 'Obs 3' }]
+  @UI.lineItem      : [{ position: 70, label: 'Obs 3' }]
+  obs3_t;
+
+  @UI.identification: [{ position: 80, label: 'Obs 4' }]
+  @UI.lineItem      : [{ position: 80, label: 'Obs 4' }]
+  obs4_t;
+
+  @UI.identification: [{ position: 90, label: 'Obs 5' }]
+  @UI.lineItem      : [{ position: 90, label: 'Obs 5' }]
+  obs5_t;
+
+}
